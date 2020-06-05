@@ -8,10 +8,10 @@ import (
 	"path"
 	"strings"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/file"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
+	"go-gin-example/pkg/file"
+	"go-gin-example/pkg/setting"
+	"go-gin-example/pkg/util"
+	"k8s.io/klog"
 )
 
 // GetImageFullUrl get the full access path
@@ -55,7 +55,7 @@ func CheckImageSize(f multipart.File) bool {
 	size, err := file.GetSize(f)
 	if err != nil {
 		log.Println(err)
-		logging.Warn(err)
+		klog.Error(err)
 		return false
 	}
 

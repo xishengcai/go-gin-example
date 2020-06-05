@@ -5,10 +5,11 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/upload"
+	"go-gin-example/pkg/app"
+	"go-gin-example/pkg/e"
+
+	"go-gin-example/pkg/upload"
+	"k8s.io/klog"
 )
 
 // @Summary Import Image
@@ -21,7 +22,7 @@ func UploadImage(c *gin.Context) {
 	appG := app.Gin{C: c}
 	file, image, err := c.Request.FormFile("image")
 	if err != nil {
-		logging.Warn(err)
+		klog.Error(err)
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
@@ -43,13 +44,13 @@ func UploadImage(c *gin.Context) {
 
 	err = upload.CheckImage(fullPath)
 	if err != nil {
-		logging.Warn(err)
+		klog.Error(err)
 		appG.Response(http.StatusInternalServerError, e.ERROR_UPLOAD_CHECK_IMAGE_FAIL, nil)
 		return
 	}
 
 	if err := c.SaveUploadedFile(image, src); err != nil {
-		logging.Warn(err)
+		klog.Error(err)
 		appG.Response(http.StatusInternalServerError, e.ERROR_UPLOAD_SAVE_IMAGE_FAIL, nil)
 		return
 	}

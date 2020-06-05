@@ -7,13 +7,14 @@ import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/export"
-	"github.com/EDDYCJY/go-gin-example/pkg/logging"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/service/tag_service"
+	"go-gin-example/pkg/app"
+	"go-gin-example/pkg/e"
+	"go-gin-example/pkg/export"
+
+	"go-gin-example/pkg/setting"
+	"go-gin-example/pkg/util"
+	"go-gin-example/service/tag_service"
+	"k8s.io/klog"
 )
 
 // @Summary Get multiple article tags
@@ -240,7 +241,7 @@ func ImportTag(c *gin.Context) {
 
 	file, _, err := c.Request.FormFile("file")
 	if err != nil {
-		logging.Warn(err)
+		klog.Error(err)
 		appG.Response(http.StatusInternalServerError, e.ERROR, nil)
 		return
 	}
@@ -248,7 +249,7 @@ func ImportTag(c *gin.Context) {
 	tagService := tag_service.Tag{}
 	err = tagService.Import(file)
 	if err != nil {
-		logging.Warn(err)
+		klog.Error(err)
 		appG.Response(http.StatusInternalServerError, e.ERROR_IMPORT_TAG_FAIL, nil)
 		return
 	}

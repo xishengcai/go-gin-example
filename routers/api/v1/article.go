@@ -8,13 +8,13 @@ import (
 	"github.com/boombuler/barcode/qr"
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/app"
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/pkg/qrcode"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/service/article_service"
-	"github.com/EDDYCJY/go-gin-example/service/tag_service"
+	"go-gin-example/pkg/app"
+	"go-gin-example/pkg/e"
+	"go-gin-example/pkg/qrcode"
+	"go-gin-example/pkg/setting"
+	"go-gin-example/pkg/util"
+	"go-gin-example/service/article_service"
+	"go-gin-example/service/tag_service"
 )
 
 // @Summary Get a single article
@@ -287,7 +287,7 @@ func DeleteArticle(c *gin.Context) {
 }
 
 const (
-	QRCODE_URL = "https://github.com/EDDYCJY/blog#gin%E7%B3%BB%E5%88%97%E7%9B%AE%E5%BD%95"
+	QRCODE_URL = "https://blog#gin%E7%B3%BB%E5%88%97%E7%9B%AE%E5%BD%95"
 )
 
 func GenerateArticlePoster(c *gin.Context) {
